@@ -151,6 +151,176 @@ or writes a `features_pending.json` sidecar on Linux/macOS.
 
 ---
 
+### `bloatware` – Remove Pre-installed Apps
+
+Removes provisioned UWP apps via DISM on Windows hosts.  On Linux/macOS
+writes a `Remove-Bloatware.ps1` first-boot script.
+
+| Config key | Default | Description |
+|---|---|---|
+| `packages` | *(35+ defaults)* | Package names to remove (Teams, Xbox, Clipchamp, …) |
+| `extra_packages` | `[]` | Additional packages on top of defaults |
+| `keep` | `[]` | Packages to skip even if listed in `packages` |
+| `script_only` | `false` | Always write PS script, even on Windows |
+
+---
+
+### `onedrive` – OneDrive Control
+
+| Config key | Default | Description |
+|---|---|---|
+| `action` | `"disable"` | `"disable"` / `"remove"` / `"remove_setup_binary"` |
+
+---
+
+### `edge` – Microsoft Edge Configuration
+
+| Config key | Default | Description |
+|---|---|---|
+| `hide_first_run` | `true` | Suppress first-run nags and import prompts |
+| `home_page` | *(none)* | Custom homepage URL |
+| `new_tab_url` | *(none)* | Custom new-tab page URL |
+| `prevent_default_browser_prompt` | `true` | Suppress "make Edge your default" prompt |
+
+---
+
+### `privacy` – Comprehensive Privacy Hardening
+
+Applies 13 independent preset groups via group-policy registry keys.
+
+| Config key | Default | Description |
+|---|---|---|
+| `presets` | *(all 13)* | List of preset names to apply |
+
+**Available presets:** `advertising_id`, `activity_history`, `app_diagnostics`,
+`find_my_device`, `handwriting`, `location`, `microphone_camera`,
+`search_history`, `wifi_sense`, `error_reporting`, `insider_programme`,
+`consumer_tips`, `feedback`
+
+---
+
+### `taskbar` – Taskbar & Start Menu
+
+| Config key | Default | Description |
+|---|---|---|
+| `alignment` | `"center"` | `"left"` or `"center"` |
+| `search_style` | `2` | `0`=hidden, `1`=icon, `2`=box, `3`=labelled box |
+| `hide_widgets` | `false` | Hide Widgets / News-and-Interests button |
+| `hide_chat` | `false` | Hide Teams Chat button |
+| `hide_task_view` | `false` | Hide Task View button |
+| `auto_hide` | `false` | Enable taskbar auto-hide |
+| `show_seconds_in_clock` | `false` | Show seconds in system clock |
+| `small_icons` | `false` | Use small taskbar icons |
+| `start_layout` | `"default"` | `"default"`, `"more_pins"`, `"more_recommendations"` |
+
+---
+
+### `power` – Power Plan
+
+| Config key | Default | Description |
+|---|---|---|
+| `plan` | `"balanced"` | `"balanced"`, `"high_performance"`, `"power_saver"`, `"ultimate_performance"` |
+| `custom_guid` | *(none)* | Custom power-plan GUID |
+
+---
+
+### `wsl` – Windows Subsystem for Linux
+
+| Config key | Default | Description |
+|---|---|---|
+| `distro` | *(none)* | Distribution to install (e.g. `"Ubuntu"`, `"Debian"`) |
+| `version` | `2` | Default WSL version |
+
+---
+
+### `drivers` – Driver Injection
+
+Injects `.inf` driver packages via DISM on Windows hosts, or copies them to
+`$OEM$\$1\Drivers` for auto-detection by Setup.
+
+| Config key | Default | Description |
+|---|---|---|
+| `drivers` | `[]` | Paths to `.inf` files or directories |
+| `recurse` | `true` | Recursively scan directories |
+| `unsigned` | `false` | Allow unsigned drivers |
+| `wim_index` | `1` | WIM index (Windows/DISM path) |
+
+---
+
+### `fonts` – Custom Fonts
+
+Copies font files to `C:\Windows\Fonts` and registers them on first boot.
+
+| Config key | Default | Description |
+|---|---|---|
+| `fonts` | `[]` | Paths to `.ttf`/`.otf`/`.ttc` files or directories |
+| `recurse` | `false` | Recursively scan font directories |
+
+---
+
+### `wallpaper` – Desktop & Lock Screen
+
+| Config key | Default | Description |
+|---|---|---|
+| `wallpaper` | *(none)* | Path to desktop wallpaper image (JPG/PNG/BMP) |
+| `lockscreen` | *(none)* | Path to lock-screen image |
+| `style` | `"fill"` | `"fill"`, `"fit"`, `"stretch"`, `"tile"`, `"center"`, `"span"` |
+
+---
+
+### `office` – Microsoft Office / Microsoft 365
+
+Embeds an ODT `Configuration.xml` and a silent-install PowerShell script.
+
+| Config key | Default | Description |
+|---|---|---|
+| `product_id` | `"O365ProPlusRetail"` | ODT product ID |
+| `arch` | `"64"` | `"64"` or `"32"` |
+| `channel` | `"Current"` | Update channel |
+| `language` | `"MatchOS"` | Language ID |
+| `exclude_apps` | `[]` | Apps to exclude (e.g. `["Access","Publisher"]`) |
+| `source_path` | *(CDN)* | Local pre-downloaded Office source tree |
+| `odt_setup_exe` | *(auto-download)* | Path to ODT `setup.exe` |
+
+---
+
+### `scripts` – Custom Scripts
+
+Generic escape hatch: injects any PowerShell / batch scripts into the ISO.
+
+| Config key | Default | Description |
+|---|---|---|
+| `scripts` | `[]` | List of `{path, destination, run_at_setup, run_as}` entries |
+
+---
+
+### `security` – Security Hardening
+
+| Config key | Default | Description |
+|---|---|---|
+| `presets` | `[]` | Preset names to apply |
+
+**Available presets:** `uac_high`, `uac_low`, `disable_smb1`,
+`disable_autorun`, `disable_remote_desktop`, `enable_remote_desktop`,
+`firewall_on`, `defender_enhanced`, `credential_guard`,
+`disable_llmnr`, `disable_netbios`
+
+---
+
+### `updates` – Windows Update Configuration
+
+| Config key | Default | Description |
+|---|---|---|
+| `presets` | `[]` | Preset names to apply |
+| `wsus_server` | *(none)* | WSUS server URL |
+
+**Available presets:** `disable_auto_update`, `notify_only`,
+`auto_download_notify_install`, `defer_feature_updates`,
+`no_reboot_with_users`, `active_hours`, `disable_driver_updates`,
+`disable_store_updates`
+
+---
+
 ## Extending with custom modules
 
 ```python

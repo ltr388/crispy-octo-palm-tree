@@ -197,11 +197,39 @@ def _build_module(mod_type: str, config: dict[str, Any]) -> BaseModule:
     from win11_customizer.modules.unattend import UnattendModule
     from win11_customizer.modules.features import FeaturesModule
     from win11_customizer.modules.registry import RegistryModule
+    from win11_customizer.modules.bloatware import BloatwareModule
+    from win11_customizer.modules.onedrive import OneDriveModule
+    from win11_customizer.modules.edge import EdgeModule
+    from win11_customizer.modules.privacy import PrivacyModule
+    from win11_customizer.modules.taskbar import TaskbarModule
+    from win11_customizer.modules.power import PowerModule
+    from win11_customizer.modules.wsl import WSLModule
+    from win11_customizer.modules.drivers import DriversModule
+    from win11_customizer.modules.fonts import FontsModule
+    from win11_customizer.modules.wallpaper import WallpaperModule
+    from win11_customizer.modules.office import OfficeModule
+    from win11_customizer.modules.scripts import ScriptsModule
+    from win11_customizer.modules.security import SecurityModule
+    from win11_customizer.modules.updates import UpdatesModule
 
     _registry = {
-        "unattend": UnattendModule,
-        "features": FeaturesModule,
-        "registry": RegistryModule,
+        "unattend":  UnattendModule,
+        "features":  FeaturesModule,
+        "registry":  RegistryModule,
+        "bloatware": BloatwareModule,
+        "onedrive":  OneDriveModule,
+        "edge":      EdgeModule,
+        "privacy":   PrivacyModule,
+        "taskbar":   TaskbarModule,
+        "power":     PowerModule,
+        "wsl":       WSLModule,
+        "drivers":   DriversModule,
+        "fonts":     FontsModule,
+        "wallpaper": WallpaperModule,
+        "office":    OfficeModule,
+        "scripts":   ScriptsModule,
+        "security":  SecurityModule,
+        "updates":   UpdatesModule,
     }
 
     klass = _registry.get(mod_type)

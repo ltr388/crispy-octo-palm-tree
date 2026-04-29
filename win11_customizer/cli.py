@@ -235,13 +235,35 @@ def _cmd_list_modules(_args: argparse.Namespace) -> int:
     from win11_customizer.modules.unattend import UnattendModule
     from win11_customizer.modules.features import FeaturesModule
     from win11_customizer.modules.registry import RegistryModule
+    from win11_customizer.modules.bloatware import BloatwareModule
+    from win11_customizer.modules.onedrive import OneDriveModule
+    from win11_customizer.modules.edge import EdgeModule
+    from win11_customizer.modules.privacy import PrivacyModule
+    from win11_customizer.modules.taskbar import TaskbarModule
+    from win11_customizer.modules.power import PowerModule
+    from win11_customizer.modules.wsl import WSLModule
+    from win11_customizer.modules.drivers import DriversModule
+    from win11_customizer.modules.fonts import FontsModule
+    from win11_customizer.modules.wallpaper import WallpaperModule
+    from win11_customizer.modules.office import OfficeModule
+    from win11_customizer.modules.scripts import ScriptsModule
+    from win11_customizer.modules.security import SecurityModule
+    from win11_customizer.modules.updates import UpdatesModule
 
-    modules = [UnattendModule, FeaturesModule, RegistryModule]
+    all_modules = [
+        UnattendModule, FeaturesModule, RegistryModule,
+        BloatwareModule, OneDriveModule, EdgeModule,
+        PrivacyModule, TaskbarModule, PowerModule,
+        WSLModule, DriversModule, FontsModule,
+        WallpaperModule, OfficeModule, ScriptsModule,
+        SecurityModule, UpdatesModule,
+    ]
     print(f"{'NAME':<20} {'CATEGORY':<16} DESCRIPTION")
-    print("-" * 72)
-    for klass in modules:
+    print("-" * 80)
+    for klass in all_modules:
         m = klass.metadata
-        print(f"{m.name:<20} {m.category:<16} {m.description}")
+        desc = m.description[:42] + "…" if len(m.description) > 43 else m.description
+        print(f"{m.name:<20} {m.category:<16} {desc}")
     return 0
 
 

@@ -1,2 +1,0 @@
-[console_scripts]
-win11-customizer = win11_customizer.cli:main

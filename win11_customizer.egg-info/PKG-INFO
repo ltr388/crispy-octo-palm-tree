@@ -1,0 +1,6 @@
+Metadata-Version: 2.4
+Name: win11-customizer
+Version: 0.1.0
+Summary: Load a Windows 11 Insider ISO and apply modules / customisations
+License: MIT
+Requires-Python: >=3.10

@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "win11-customizer"
+version = "0.1.0"
+description = "Load a Windows 11 Insider ISO and apply modules / customisations"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = []
+
+[project.scripts]
+win11-customizer = "win11_customizer.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["win11_customizer*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

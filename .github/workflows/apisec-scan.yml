@@ -55,11 +55,11 @@ jobs:
 
     steps:
        - name: Skip APIsec scan (credentials not configured)
-         if: ${{ secrets.apisec_username == '' || secrets.apisec_password == '' }}
+         if: secrets.apisec_username == '' || secrets.apisec_password == ''
          run: echo "APIsec credentials are not configured. Skipping scan."
 
        - name: APIsec scan
-         if: ${{ secrets.apisec_username != '' && secrets.apisec_password != '' }}
+         if: secrets.apisec_username != '' && secrets.apisec_password != ''
          id: apisec-scan
          uses: apisec-inc/apisec-run-scan@025432089674a28ba8fb55f8ab06c10215e772ea
          with:
@@ -73,7 +73,7 @@ jobs:
           sarif-result-file: "apisec-results.sarif"
 
        - name: Import results
-         if: ${{ steps.apisec-scan.conclusion == 'success' }}
+         if: steps.apisec-scan.conclusion == 'success'
          uses: github/codeql-action/upload-sarif@v3
          with:
           sarif_file: ./apisec-results.sarif
